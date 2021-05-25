@@ -1,13 +1,12 @@
 package br.com.zupacademy.neto.mercadolivre.requests;
 
+import br.com.zupacademy.neto.mercadolivre.config.validacoes.SenhaValidacoes;
 import br.com.zupacademy.neto.mercadolivre.config.validacoes.Unique;
 import br.com.zupacademy.neto.mercadolivre.dominios.Usuario;
-import br.com.zupacademy.neto.mercadolivre.config.validacoes.SenhasValidacoes;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 
 public class UsuarioCadastroRequest {
 
@@ -29,15 +28,14 @@ public class UsuarioCadastroRequest {
 
     @Size(min = 6, message = "minimo de 6 caractéres")
     private String password;
-    private LocalDateTime criandoEm = LocalDateTime.now();
 
     public UsuarioCadastroRequest(String email, String password) {
         this.email = email;
-        this.password = SenhasValidacoes.encripta(password);
+        this.password = password;
     }
 
 
     public Usuario toModel() {
-        return new Usuario(this.email, this.password, this.criandoEm);
+        return new Usuario(this.email, new SenhaValidacoes(this.password));
     }
 }
