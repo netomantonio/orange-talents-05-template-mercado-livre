@@ -3,10 +3,7 @@ package br.com.zupacademy.neto.mercadolivre.controllers;
 import br.com.zupacademy.neto.mercadolivre.dominios.Usuario;
 import br.com.zupacademy.neto.mercadolivre.repositories.UsuarioRepository;
 import br.com.zupacademy.neto.mercadolivre.requests.UsuarioCadastroRequest;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
