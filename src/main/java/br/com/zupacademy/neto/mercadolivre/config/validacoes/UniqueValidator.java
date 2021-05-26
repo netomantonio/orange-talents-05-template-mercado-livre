@@ -1,5 +1,6 @@
 package br.com.zupacademy.neto.mercadolivre.config.validacoes;
 
+import br.com.zupacademy.neto.mercadolivre.config.anotacoes.Unique;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;

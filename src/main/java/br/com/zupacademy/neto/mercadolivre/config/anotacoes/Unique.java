@@ -1,4 +1,6 @@
-package br.com.zupacademy.neto.mercadolivre.config.validacoes;
+package br.com.zupacademy.neto.mercadolivre.config.anotacoes;
+
+import br.com.zupacademy.neto.mercadolivre.config.validacoes.UniqueValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

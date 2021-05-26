@@ -1,7 +1,7 @@
 package br.com.zupacademy.neto.mercadolivre.requests;
 
 import br.com.zupacademy.neto.mercadolivre.config.validacoes.SenhaValidacoes;
-import br.com.zupacademy.neto.mercadolivre.config.validacoes.Unique;
+import br.com.zupacademy.neto.mercadolivre.config.anotacoes.Unique;
 import br.com.zupacademy.neto.mercadolivre.dominios.Usuario;
 
 import javax.validation.constraints.Email;
