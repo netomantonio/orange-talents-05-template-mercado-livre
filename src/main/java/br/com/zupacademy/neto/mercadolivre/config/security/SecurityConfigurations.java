@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
@@ -22,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private AutenticacaoService autenticacaoService;
+	private AutenticacaoUsuario autenticacaoUsuario;
 
 	@Autowired
 	private TokenService tokenService;
@@ -40,22 +39,22 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	//Configuracoes de autenticacao
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(autenticacaoUsuario).passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
 	//Configuracoes de autorizacao
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
-		.antMatchers(HttpMethod.POST, "/api/categorias/**").authenticated()
-		.antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/usuarios").authenticated()
-		.anyRequest().authenticated()
-		.and().csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
-//		.exceptionHandling().authenticationEntryPoint(new JwtAuthenticationEntryPoint());
+				.antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/categorias").authenticated()
+				.antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/usuarios").authenticated()
+				.antMatchers(HttpMethod.POST, "/api/produtos").authenticated()
+				.anyRequest().authenticated()
+				.and().csrf().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	
