@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,6 +32,9 @@ public class Produto {
     private Usuario anunciante;
 
     private LocalDate instante = LocalDate.now();
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<ImagemProduto> imagens;
 
     @Deprecated
     public Produto() {
@@ -61,5 +65,17 @@ public class Produto {
         this.descricao = descricao;
         this.categoria = categoria;
         this.anunciante = anunciante;
+    }
+
+    public Usuario getAnunciante() {
+        return this.anunciante;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void addImagens(List<ImagemProduto> novasImagens) {
+        this.imagens = imagens;
     }
 }
