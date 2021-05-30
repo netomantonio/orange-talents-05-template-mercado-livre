@@ -75,6 +75,10 @@ public class Produto {
         return this.anunciante;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public Long getId() {
         return this.id;
     }
@@ -85,5 +89,14 @@ public class Produto {
 
     public void addOpiniao(OpiniaoProduto opiniao) {
         this.opinioes.add(opiniao);
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", categoria=" + categoria +
+                '}';
     }
 }
