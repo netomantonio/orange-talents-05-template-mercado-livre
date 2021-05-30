@@ -5,6 +5,7 @@ import br.com.zupacademy.neto.mercadolivre.requests.CaracteristicaRequest;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,10 +32,13 @@ public class Produto {
     @ManyToOne
     private Usuario anunciante;
 
-    private LocalDate instante = LocalDate.now();
+    private final LocalDate instante = LocalDate.now();
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    private List<ImagemProduto> imagens;
+    private List<ImagemProduto> imagens = new ArrayList<>();
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<OpiniaoProduto> opinioes = new ArrayList<>();
 
     @Deprecated
     public Produto() {
@@ -77,5 +81,9 @@ public class Produto {
 
     public void addImagens(List<ImagemProduto> novasImagens) {
         this.imagens = imagens;
+    }
+
+    public void addOpiniao(OpiniaoProduto opiniao) {
+        this.opinioes.add(opiniao);
     }
 }

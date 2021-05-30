@@ -11,7 +11,7 @@ public class Categoria {
     private Long id;
     private String nome;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     private Categoria mae;
 
     @Deprecated
