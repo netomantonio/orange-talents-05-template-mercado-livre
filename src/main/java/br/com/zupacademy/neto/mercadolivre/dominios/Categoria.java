@@ -15,14 +15,24 @@ public class Categoria {
     private Categoria mae;
 
     @Deprecated
-    public Categoria(){}
+    public Categoria() {
+    }
 
     public Categoria(String nome) {
 
         this.nome = nome;
     }
 
-    public void setCategoriaMae(Categoria mae){
+    public void setCategoriaMae(Categoria mae) {
         this.mae = mae;
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", mae=" + mae +
+                '}';
     }
 }

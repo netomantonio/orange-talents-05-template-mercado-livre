@@ -12,14 +12,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
 
 public class CadastroProdutoRequest {
     @NotBlank(message = "Nome do produto é obrigatório")
     private final String nome;
-    @Positive(message = "Valor do produto deve ser maior que zero")
-    private final String valor;
+    private final @Positive BigDecimal valor;
     @PositiveOrZero(message = "Quantidade deve ser igual ou maior a zero")
     private final String quantidade;
     @Size(min = 3)
@@ -30,7 +30,7 @@ public class CadastroProdutoRequest {
     @ExisteID(domainClass = Categoria.class)
     private final Long idCategoria;
 
-    public CadastroProdutoRequest(String nome, String valor, String quantidade, Set<CaracteristicaRequest> caracteristicas, String descricao, Long idCategoria) {
+    public CadastroProdutoRequest(String nome, @Positive BigDecimal valor, String quantidade, Set<CaracteristicaRequest> caracteristicas, String descricao, Long idCategoria) {
         this.nome = nome;
         this.valor = valor;
         this.quantidade = quantidade;

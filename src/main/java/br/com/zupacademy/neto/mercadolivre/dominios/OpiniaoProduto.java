@@ -42,4 +42,20 @@ public class OpiniaoProduto {
         this.titulo = titulo;
         this.descricao = descricao;
     }
+
+    public Integer getNota() {
+        return nota;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

@@ -35,17 +35,20 @@ public class Pergunta {
         this.produto = produto;
     }
 
-    public Produto getProduto() {
-        return produto;
+
+    public String getTitulo() {
+        return titulo;
     }
 
-    @Override
-    public String toString() {
-        return "Pergunta{" +
-                "titulo='" + titulo + '\'' +
-                ", curioso=" + curioso +
-                ", produto=" + produto +
-                ", criadoEm=" + criadoEm +
-                '}';
+    public String getCurioso() {
+        return curioso.getUsername();
+    }
+
+    public String getEmailAnunciante() {
+        return this.produto.getAnunciante().getUsername();
+    }
+
+    public String getNomeProduto() {
+        return this.produto.getNome();
     }
 }

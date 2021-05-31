@@ -11,8 +11,8 @@ public class CentralEmails {
     EnviaEmail enviaEmail;
 
     public void enviaEmailNovaPergunta(Pergunta pergunta) {
-        String email = pergunta.getProduto().getAnunciante().getUsername();
-        String assunto = "Pergunta para o produto: " + pergunta.getProduto().getNome();
+        String email = pergunta.getEmailAnunciante();
+        String assunto = "Pergunta para o produto: " + pergunta.getNomeProduto();
         String corpo = pergunta.toString();
 
         enviaEmail.dispararEmail(email, assunto, corpo);
