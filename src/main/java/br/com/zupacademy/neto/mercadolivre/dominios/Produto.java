@@ -26,7 +26,7 @@ public class Produto {
     private String nome;
     private @Positive BigDecimal valor;
     @PositiveOrZero
-    private String quantidade;
+    private Integer quantidade;
     @Size(min = 3)
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private Set<CaracteristicaProduto> caracteristicaProdutos;
@@ -54,7 +54,7 @@ public class Produto {
 
     public Produto(@NotBlank(message = "Nome do produto é obrigatório") String nome,
                    @Positive BigDecimal valor,
-                   @PositiveOrZero(message = "Quantidade deve ser igual ou maior a zero") String quantidade,
+                   @PositiveOrZero(message = "Quantidade deve ser igual ou maior a zero") Integer quantidade,
                    @NotBlank(message = "Todo produto deve ter minimo de 3 caracteristicaProdutos")
                    @Size(min = 3, message = "minimo de 3 caracteristicaProdutos") Set<CaracteristicaRequest> caracteristicas,
                    @NotBlank(message = "É obrigatório preencher a descrição do produto") String descricao,
@@ -138,5 +138,13 @@ public class Produto {
 
     public <T> Set<T> mapPerguntas(Function<Pergunta, T> funcaoMapeadora) {
         return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public synchronized boolean abaterEstoque(Integer quantidade) {
+        if (quantidade <= this.quantidade) {
+            this.quantidade -= quantidade;
+            return true;
+        }
+        return false;
     }
 }

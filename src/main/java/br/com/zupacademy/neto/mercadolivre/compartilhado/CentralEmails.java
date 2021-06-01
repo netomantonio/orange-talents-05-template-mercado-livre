@@ -1,5 +1,6 @@
 package br.com.zupacademy.neto.mercadolivre.compartilhado;
 
+import br.com.zupacademy.neto.mercadolivre.dominios.Compra;
 import br.com.zupacademy.neto.mercadolivre.dominios.Pergunta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,5 +17,16 @@ public class CentralEmails {
         String corpo = pergunta.toString();
 
         enviaEmail.dispararEmail(email, assunto, corpo);
+    }
+
+    public void enviaEmailNovaCompra(Compra novaCompra) {
+        String email = novaCompra.getEmailComprador();
+        String assunto = "[Compra efetivada com sucesso, produto: ]" + novaCompra.getNomeProduto();
+        String corpo = "Detalhes da Compra: \n" +
+                "Método de pagamento: " + novaCompra.getMetodoPagamento() +
+                "Produto: " + novaCompra.getNomeProduto() +
+                "Quantidade: " + novaCompra.getQuantidade() +
+                "Valor: " + novaCompra.getValor() +
+                "Status: " + novaCompra.getStatus();
     }
 }

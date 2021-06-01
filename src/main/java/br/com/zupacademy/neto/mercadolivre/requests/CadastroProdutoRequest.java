@@ -21,7 +21,7 @@ public class CadastroProdutoRequest {
     private final String nome;
     private final @Positive BigDecimal valor;
     @PositiveOrZero(message = "Quantidade deve ser igual ou maior a zero")
-    private final String quantidade;
+    private final Integer quantidade;
     @Size(min = 3)
     private final Set<CaracteristicaRequest> caracteristicas;
     @NotBlank(message = "É obrigatório preencher a descrição do produto")
@@ -30,7 +30,7 @@ public class CadastroProdutoRequest {
     @ExisteID(domainClass = Categoria.class)
     private final Long idCategoria;
 
-    public CadastroProdutoRequest(String nome, @Positive BigDecimal valor, String quantidade, Set<CaracteristicaRequest> caracteristicas, String descricao, Long idCategoria) {
+    public CadastroProdutoRequest(String nome, @Positive BigDecimal valor, Integer quantidade, Set<CaracteristicaRequest> caracteristicas, String descricao, Long idCategoria) {
         this.nome = nome;
         this.valor = valor;
         this.quantidade = quantidade;
@@ -39,17 +39,6 @@ public class CadastroProdutoRequest {
         this.idCategoria = idCategoria;
     }
 
-    @Override
-    public String toString() {
-        return "CadastroProdutoRequest{" +
-                "nome='" + nome + '\'' +
-                ", valor='" + valor + '\'' +
-                ", quantidade='" + quantidade + '\'' +
-                ", caracteristicas=" + caracteristicas +
-                ", descricao='" + descricao + '\'' +
-                ", categoria='" + idCategoria + '\'' +
-                '}';
-    }
 
     public Produto toModel(Usuario usuario, CategoriaRepository categoriaRepository) {
         Optional<Categoria> categoria = categoriaRepository.findById(this.idCategoria);
