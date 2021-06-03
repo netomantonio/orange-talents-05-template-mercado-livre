@@ -29,15 +29,18 @@ public class Usuario implements UserDetails {
     @Length(min = 6)
     private String password;
     private LocalDateTime criandoEm = LocalDateTime.now();
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Perfil> perfis = new ArrayList<>();
 
     @Deprecated
-    public Usuario(){}
+    public Usuario() {
+    }
 
     public Usuario(@Email(message = "deve ter formato de email válido") @NotBlank(message = "Email é obrigatório") String email,
-                   @Valid @NotBlank SenhaValidacoes senhaLimpa){
+                   @Valid @NotBlank SenhaValidacoes senhaLimpa) {
 
-        Assert.isTrue(StringUtils.hasLength(email),"email não pode estar em branco");
-        Assert.notNull(senhaLimpa,"email não pode estar em branco");
+        Assert.isTrue(StringUtils.hasLength(email), "email não pode estar em branco");
+        Assert.notNull(senhaLimpa, "email não pode estar em branco");
 
 
         this.email = email;
@@ -47,8 +50,6 @@ public class Usuario implements UserDetails {
     public Long getId() {
         return this.id;
     }
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Perfil> perfis = new ArrayList<>();
 
     @Override
     public int hashCode() {
